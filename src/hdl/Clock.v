@@ -23,12 +23,12 @@ module Clock (
   /* Sequential Logic */
   always @(posedge clk, posedge rst) begin
     if (rst) begin
-      count <= 64'b0;
+      count <= MAX_COUNT;
     end else begin
-      if (count < MAX_COUNT) begin
-        count <= count + 1;
+      if (count <= MAX_COUNT) begin
+        count <= count - 1;
       end else begin
-        count <= 64'b0;
+        count <= MAX_COUNT;
       end
     end
   end

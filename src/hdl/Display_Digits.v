@@ -22,23 +22,4 @@ module Display_Digits (
   
   Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_NYBLES(16)) counter(.clk(clk), .rst(1'b0), .enable(1'b1), .numberIn(count), .numberOut(count));
   
-  /*
-  always @(posedge clk) begin
-    if (count+1 < NUMBER_OF_DIGITS) begin
-      count <= count+1;
-    end else begin
-      count <= 0;
-    end
-  end
-  */
-//   /* Sequential Logic */
-//   always @(posedge clk) begin
-//       // probably use foorloop with genvar
-//       selected_number [3] <= number [(count*4)+3];
-//       selected_number [2] <= number [(count*4)+2];
-//       selected_number [1] <= number [(count*4)+1];
-//       selected_number [0] <= number [(count*4)+0];
-//       io_sel[3:0] <= ~(4'b0000 | (1 << count));
-//   end
-  
 endmodule
