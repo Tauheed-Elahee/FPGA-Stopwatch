@@ -11,11 +11,11 @@ module au_top(
     
     wire rst;
     wire clock_seconds_1;
-    wire clock_seconds_10;
     wire [3:0] seconds_1;
     wire [3:0] seconds_10;
     
     wire slowClk;
+    wire [1:0] threshold;
     
     clkDivider slowDown(.clk(clk), .rst(rst), .clkOut(slowClk));
     
@@ -24,10 +24,11 @@ module au_top(
     
     // does not handle division in the inputs properly.
     Clock #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)) one_second_clock(.clk(clk), .rst(rst), .clkOut(clock_seconds_1));
-    Clock #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_PERIOD_IN_SECONDS(10)) ten_second_clock(.clk(clk), .rst(rst), .clkOut(clock_seconds_10));
     
-    Counter #(.BASE(10)) counterSeconds1(.clk(clk), .rst(rst), .enable(clock_seconds_1), .numberIn(seconds_1[3:0]), .numberOut(seconds_1[3:0]));
-    Counter #(.BASE(6)) counterSeconds10(.clk(clk), .rst(rst), .enable(clock_seconds_10), .numberIn(seconds_10[3:0]), .numberOut(seconds_10[3:0]));
+    assign threshold[1] = clock_seconds_1 & threshold[0];
+    
+    Counter #(.BASE(10)) counterSeconds1(.clk(clk), .rst(rst), .enable(clock_seconds_1), .numberIn(seconds_1[3:0]), .numberOut(seconds_1[3:0]), .threshold(threshold[0]));
+    Counter #(.BASE(6)) counterSeconds10(.clk(clk), .rst(rst), .enable(threshold[1]), .numberIn(seconds_10[3:0]), .numberOut(seconds_10[3:0]));
     
     
     assign led [7:4] = seconds_10 [3:0];
