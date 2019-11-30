@@ -1,4 +1,3 @@
-`include "/home/thegreat/projects/_Hardware/FPGA/Verilog/basicCounter/source/Counter.v" 
 module Display_Digits (
     clk,
     number,

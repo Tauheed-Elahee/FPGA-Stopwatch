@@ -21,8 +21,6 @@ module au_top(
     
     reset_debouncer reset_conditioner(.clk(clk), .in(!rst_n), .out(rst));
     
-    //clkDivider clkDivider(.clk(clk), .rst(rst), .clkOut(clock_seconds_1));
-    
     
     // does not handle division in the inputs properly.
     Clock #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)) one_second_clock(.clk(clk), .rst(rst), .clkOut(clock_seconds_1));
@@ -41,15 +39,6 @@ module au_top(
     
     Display_Digits #(.NUMBER_OF_DIGITS(2)) display_digits(.clk(slowClk), .number({seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg));
     
-    /*
-    // 0 is on and 1 is off
-    assign io_sel [3:0] = 4'b1110;
-    //assign io_seg [7:0] = 8'b0000_1111;
-    wire [7:0] digit_high_1;
-    BCD bcd_1(seconds_1[3:0], digit_high_1[7:0]);
-    
-    assign io_seg [7:0] = ~digit_high_1 [7:0];
-    */
     assign usb_tx = usb_rx;
     
 endmodule
