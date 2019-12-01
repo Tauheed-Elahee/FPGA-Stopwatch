@@ -26,8 +26,6 @@ module au_top(
     assign threshold[1] = clock_seconds_1 & threshold[0];
     assign threshold[3] = clock_seconds_1 & threshold[0] & threshold[2];
     
-    // Alchitry labs cannot understand project hierachry and so a seperate and duplicate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
-    
     Counter #(.BASE(10)) counterSeconds1(.clk(clk), .rst(rst), .enable(clock_seconds_1), .numberIn(seconds_1[3:0]), .numberOut(seconds_1[3:0]), .threshold(threshold[0]));
     Counter #(.BASE(6)) counterSeconds10(.clk(clk), .rst(rst), .enable(threshold[1]), .numberIn(seconds_10[3:0]), .numberOut(seconds_10[3:0]), .threshold(threshold[2]));
     

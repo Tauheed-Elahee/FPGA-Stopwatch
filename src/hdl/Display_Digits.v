@@ -30,6 +30,7 @@ module Display_Digits (
   assign selected_number[1] = number[(count*4)+1];
   assign selected_number[0] = number[(count*4)+0];
   
-  BCD_n bcd(.number(selected_number[3:0]), .digit_n(io_seg[7:0]));
+  BCD_n bcd(.number(selected_number[3:0]), .digit_n(io_seg[6:0]));
+  assign io_seg[7] = 1'b1;
   
 endmodule

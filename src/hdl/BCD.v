@@ -1,6 +1,6 @@
 module BCD (
     input wire [3:0] number,
-    output wire [7:0] digit
+    output wire [6:0] digit
   );
 
   assign digit[0] =  (~number[3]&~number[2]&~number[1]&~number[0])  // 0
@@ -57,7 +57,5 @@ module BCD (
                   |  (~number[3]&number[2]&number[1]&~number[0])  // 6
                   |  (number[3]&~number[2]&~number[1]&~number[0])  // 8
                   |  (number[3]&~number[2]&~number[1]&number[0]); // 9
-                  
-  assign digit[7] = 0;
   
 endmodule
