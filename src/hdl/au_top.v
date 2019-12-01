@@ -1,4 +1,5 @@
-// test git identity
+// test git identity.
+// Git does not work as I expected it to.
 module au_top(
     input wire clk,
     input wire rst_n,
