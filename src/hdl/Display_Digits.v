@@ -18,7 +18,13 @@ module Display_Digits (
 
   /* Combinational Logic */
   BCD_n bcd(.number(selected_number[3:0]), .digit_n(io_seg[7:0]));
-  assign  {io_sel[3:0],selected_number[3:0]} = (|count)? {4'b1101,number[7:4]}:{4'b1110,number[3:0]};
+  //assign  {io_sel[3:0],selected_number[3:0]} = (|count)? {4'b1101,number[7:4]}:{4'b1110,number[3:0]};
+  
+  assign io_sel[3:0] = ~(1 << count);
+  assign selected_number[3] = number[(count*4)+3];
+  assign selected_number[2] = number[(count*4)+2];
+  assign selected_number[1] = number[(count*4)+1];
+  assign selected_number[0] = number[(count*4)+0];
   
   Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_NYBLES(16)) counter(.clk(clk), .rst(1'b0), .enable(1'b1), .numberIn(count), .numberOut(count));
   
