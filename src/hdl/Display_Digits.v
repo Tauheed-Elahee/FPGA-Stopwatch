@@ -12,13 +12,17 @@ module Display_Digits (
   output wire [3:0] io_sel;
   output wire [7:0] io_seg;
 
-  wire [3:0] selected_number;
-//   integer count;
+  wire [63:0] display_refresh_clock_counter;
+  wire display_refresh_clock;
   wire [63:0] count;
+  wire [3:0] selected_number;
 
   /* Combinational Logic */
-  BCD_n bcd(.number(selected_number[3:0]), .digit_n(io_seg[7:0]));
-  //assign  {io_sel[3:0],selected_number[3:0]} = (|count)? {4'b1101,number[7:4]}:{4'b1110,number[3:0]};
+  Counter #(.BASE(125_000), .NUMBER_OF_NYBLES(16)) refresh_rate_generator(.clk(clk), .rst(1'b0), .enable(1'b1), .numberIn(display_refresh_clock_counter), .numberOut(display_refresh_clock_counter)); // 2^20 = 1048576
+  
+  assign display_refresh_clock = (|display_refresh_clock_counter)? 0:1;
+  
+  Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_NYBLES(16)) number_selector(.clk(display_refresh_clock), .rst(1'b0), .enable(1'b1), .numberIn(count), .numberOut(count));
   
   assign io_sel[3:0] = ~(1 << count);
   assign selected_number[3] = number[(count*4)+3];
@@ -26,6 +30,6 @@ module Display_Digits (
   assign selected_number[1] = number[(count*4)+1];
   assign selected_number[0] = number[(count*4)+0];
   
-  Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_NYBLES(16)) counter(.clk(clk), .rst(1'b0), .enable(1'b1), .numberIn(count), .numberOut(count));
+  BCD_n bcd(.number(selected_number[3:0]), .digit_n(io_seg[7:0]));
   
 endmodule

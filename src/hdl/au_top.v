@@ -15,10 +15,7 @@ module au_top(
     wire [3:0] seconds_10;
     wire [3:0] minutes_1;
     
-    wire slowClk;
     wire [4:0] threshold;
-    
-    clkDivider slowDown(.clk(clk), .rst(rst), .clkOut(slowClk));
     
     reset_debouncer reset_conditioner(.clk(clk), .in(!rst_n), .out(rst));
     
@@ -29,10 +26,12 @@ module au_top(
     assign threshold[1] = clock_seconds_1 & threshold[0];
     assign threshold[3] = clock_seconds_1 & threshold[0] & threshold[2];
     
+    // Alchitry labs cannot understand project hierachry and so a seperate and duplicate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
+    
     Counter #(.BASE(10)) counterSeconds1(.clk(clk), .rst(rst), .enable(clock_seconds_1), .numberIn(seconds_1[3:0]), .numberOut(seconds_1[3:0]), .threshold(threshold[0]));
     Counter #(.BASE(6)) counterSeconds10(.clk(clk), .rst(rst), .enable(threshold[1]), .numberIn(seconds_10[3:0]), .numberOut(seconds_10[3:0]), .threshold(threshold[2]));
     
-    Counter #(.BASE(6)) counterMinutes1(.clk(clk), .rst(rst), .enable(threshold[3]), .numberIn(minutes_1[3:0]), .numberOut(minutes_1[3:0]), .threshold(threshold[4]));
+    Counter #(.BASE(10)) counterMinutes1(.clk(clk), .rst(rst), .enable(threshold[3]), .numberIn(minutes_1[3:0]), .numberOut(minutes_1[3:0]), .threshold(threshold[4]));
     
     
     assign led [7:4] = seconds_10 [3:0];
@@ -43,7 +42,7 @@ module au_top(
     assign io_led [7:4] = seconds_10 [3:0];
     assign io_led [3:0] = seconds_1 [3:0];
     
-    Display_Digits #(.NUMBER_OF_DIGITS(3)) display_digits(.clk(slowClk), .number({minutes_1[3:0], seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg));
+    Display_Digits #(.NUMBER_OF_DIGITS(3)) display_digits(.clk(clk), .number({minutes_1[3:0], seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg));
     
     assign usb_tx = usb_rx;
     
