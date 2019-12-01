@@ -13,3 +13,10 @@ WHY IS IT THAT ALLLLLLLLLLLLLLL SOFTWARE IS SHIT????????????????
 
 Why is git so difficult??????
 I have enough problems with Alchitry Labs and Vivado.
+
+
+
+
+
+
+Need to do write cryptic gliphs with a magical encantion and a rain dance to be able to commit to a git repo. THIS MUST BE DONE IN EVERY REPO FOR SOME RASON AS GIT IS APPARENTLY NOT USER FRIENDLY.
