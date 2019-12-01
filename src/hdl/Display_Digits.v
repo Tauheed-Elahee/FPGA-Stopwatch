@@ -6,6 +6,7 @@ module Display_Digits (
   );
   
   parameter NUMBER_OF_DIGITS = 1;
+  parameter REFRESH_RATE_IN_HERTZ = 200;
   
   input wire clk;  // clock
   input wire [((NUMBER_OF_DIGITS*4)-1):0] number;  // reset

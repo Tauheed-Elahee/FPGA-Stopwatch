@@ -47,7 +47,7 @@ module au_top(
     assign io_led [3:0] = seconds_1 [3:0];
     
     // It works with 3 displays but not 4. It is the combined dark majic of Alchitry and Vivado that prevents good verilog from being implemented. IT IS VERY PICKY ABOUT REFRESH RATES
-    Display_Digits #(.NUMBER_OF_DIGITS(4)) display_digits(.clk(clk), .number({minutes_10[3:0], minutes_1[3:0], seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg));
+    Display_Digits #(.NUMBER_OF_DIGITS(4), .REFRESH_RATE_IN_HERTZ(200)) display_digits(.clk(clk), .number({minutes_10[3:0], minutes_1[3:0], seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg));
     
     assign usb_tx = usb_rx;
     
