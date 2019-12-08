@@ -39,14 +39,14 @@ module au_top(
     
     // Alchitry labs cannot understand project hierachry and so a seperate and duplicate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
     
-    Counter2 #(.BASE(10)) counterSeconds1(  .clk(clk),
+    Counter #(.BASE(5)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
                                             .enable(clock_seconds_1),
                                             .numberIn(seconds_1[3:0]),
                                             .numberOut(seconds_1[3:0]),
                                             .threshold(threshold[0])
                                          );
-    Counter2 #(.BASE(6)) counterSeconds10(  .clk(clk),
+    Counter #(.BASE(6)) counterSeconds10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[1]),
                                             .numberIn(seconds_10[3:0]),
@@ -54,14 +54,14 @@ module au_top(
                                             .threshold(threshold[2])
                                          );
     
-    Counter2 #(.BASE(10)) counterMinutes1(  .clk(clk),
+    Counter #(.BASE(10)) counterMinutes1(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[3]),
                                             .numberIn(minutes_1[3:0]),
                                             .numberOut(minutes_1[3:0]),
                                             .threshold(threshold[4])
                                          );
-    Counter2 #(.BASE(6)) counterMinutes10(  .clk(clk),
+    Counter #(.BASE(6)) counterMinutes10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[5]),
                                             .numberIn(minutes_10[3:0]),

@@ -1,3 +1,4 @@
 # Ignore Vivado Project directory
-FPGA-Stopwatch/**
 Au-Base-Project-master/**
+# Ignore the Alchitry directory
+FPGA-Stopwatch/**
