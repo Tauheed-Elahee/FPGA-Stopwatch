@@ -14,7 +14,9 @@ module Counter (
   input wire enable;
   input wire [(NUMBER_OF_NYBLES*4-1):0] numberIn;
   output reg [(NUMBER_OF_NYBLES*4-1):0] numberOut;
-  output reg threshold;
+  output wire threshold;
+  
+  assign threshold = (numberOut == (BASE-1))? 1:0;
   
   /* Sequential Logic */
   // Async rst
@@ -23,7 +25,7 @@ module Counter (
       numberOut <= 8'b0;
     end else if (enable) begin
       numberOut <= ((0 <= numberIn) && (numberIn < (BASE-1)))? numberIn+1:0;  // numberIn must be between [0:BASE-1[ for numberOut to be [0:BASE[ and be of base BASE
-      threshold <= (numberOut == (BASE-2))? 1:0;
+      //threshold <= (numberOut == (BASE-2))? 1:0;
     end
   end
   

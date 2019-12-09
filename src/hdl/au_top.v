@@ -1,6 +1,7 @@
 module au_top(
     input wire clk,
     input wire rst_n,
+    input wire [23:0] io_dip,
     output wire [7:0] led,
     output wire [23:0] io_led,
     output wire [3:0] io_sel,
@@ -74,7 +75,10 @@ module au_top(
     assign led [7:4] = seconds_10 [3:0];
     assign led [3:0] = seconds_1 [3:0];
     
-    assign io_led [23:16] = 16'b1111_1111;
+    assign io_led [23] = io_dip[23];
+    assign io_led [22] = |io_dip[22:0];
+    
+    assign io_led [21:16] = 16'b1111_1111;
     assign io_led [15:12] = minutes_10 [3:0];
     assign io_led [11:8] = minutes_1 [3:0];
     assign io_led [7:4] = seconds_10 [3:0];
