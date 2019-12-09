@@ -41,31 +41,35 @@ module au_top(
     // Alchitry labs cannot understand project hierachry and so a seperate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
     // The doublicate counter was changed to a wrapper for the counter file.
     
-    Counter2 #(.BASE(10)) counterSeconds1(  .clk(clk),
+    Counter3 #(.BASE(10)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
                                             .enable(clock_seconds_1),
+                                            .up_down(io_dip[0]),
                                             .numberIn(seconds_1[3:0]),
                                             .numberOut(seconds_1[3:0]),
                                             .threshold(threshold[0])
                                          );
-    Counter2 #(.BASE(6)) counterSeconds10(  .clk(clk),
+    Counter3 #(.BASE(6)) counterSeconds10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[1]),
+                                            .up_down(io_dip[0]),
                                             .numberIn(seconds_10[3:0]),
                                             .numberOut(seconds_10[3:0]),
                                             .threshold(threshold[2])
                                          );
     
-    Counter2 #(.BASE(10)) counterMinutes1(  .clk(clk),
+    Counter3 #(.BASE(10)) counterMinutes1(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[3]),
+                                            .up_down(io_dip[0]),
                                             .numberIn(minutes_1[3:0]),
                                             .numberOut(minutes_1[3:0]),
                                             .threshold(threshold[4])
                                          );
-    Counter2 #(.BASE(6)) counterMinutes10(  .clk(clk),
+    Counter3 #(.BASE(6)) counterMinutes10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[5]),
+                                            .up_down(io_dip[0]),
                                             .numberIn(minutes_10[3:0]),
                                             .numberOut(minutes_10[3:0]),
                                             .threshold(threshold[6])
@@ -75,8 +79,8 @@ module au_top(
     assign led [7:4] = seconds_10 [3:0];
     assign led [3:0] = seconds_1 [3:0];
     
-    assign io_led [23] = io_dip[23];
-    assign io_led [22] = |io_dip[22:0];
+    assign io_led [23] = io_dip[0];
+    assign io_led [22] = |io_dip[23:1];
     
     assign io_led [21:16] = 16'b1111_1111;
     assign io_led [15:12] = minutes_10 [3:0];
