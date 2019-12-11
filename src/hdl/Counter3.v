@@ -8,19 +8,19 @@ module Counter3 (
     threshold
   );
   parameter BASE = 10;
-  parameter NUMBER_OF_NYBLES = 1;
+  parameter NUMBER_OF_BITS = 4;
   
   input wire clk;
   input wire rst;
   input wire enable;
   input wire up_down;
-  input wire [(NUMBER_OF_NYBLES*4-1):0] numberIn;
-  output reg [(NUMBER_OF_NYBLES*4-1):0] numberOut;
+  input wire [(NUMBER_OF_BITS-1):0] numberIn;
+  output reg [(NUMBER_OF_BITS-1):0] numberOut;
   output wire threshold;
   
-  wire [(NUMBER_OF_NYBLES*4-1):0] numberNext;
-  wire [(NUMBER_OF_NYBLES*4-1):0] numberIncrement;
-  wire [(NUMBER_OF_NYBLES*4-1):0] numberDecrement;
+  wire [(NUMBER_OF_BITS-1):0] numberNext;
+  wire [(NUMBER_OF_BITS-1):0] numberIncrement;
+  wire [(NUMBER_OF_BITS-1):0] numberDecrement;
   
   /* Combinational Logic */
   assign numberIncrement = ((0 <= numberIn) && (numberIn < (BASE-1)))? numberIn+1:0;  // numberIn must be between [0:BASE-1[ for numberOut to be [0:BASE[ and be of base BASE
