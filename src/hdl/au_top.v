@@ -41,7 +41,7 @@ module au_top(
     // Alchitry labs cannot understand project hierachry and so a seperate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
     // The doublicate counter was changed to a wrapper for the counter file.
     
-    Counter3 #(.BASE(10)) counterSeconds1(  .clk(clk),
+    Counter2 #(.BASE(10)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
                                             .enable(clock_seconds_1),
                                             .up_down(io_dip[0]),
@@ -49,7 +49,7 @@ module au_top(
                                             .numberOut(seconds_1[3:0]),
                                             .threshold(threshold[0])
                                          );
-    Counter3 #(.BASE(6)) counterSeconds10(  .clk(clk),
+    Counter2 #(.BASE(6)) counterSeconds10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[1]),
                                             .up_down(io_dip[0]),
@@ -58,7 +58,7 @@ module au_top(
                                             .threshold(threshold[2])
                                          );
     
-    Counter3 #(.BASE(10)) counterMinutes1(  .clk(clk),
+    Counter2 #(.BASE(10)) counterMinutes1(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[3]),
                                             .up_down(io_dip[0]),
@@ -66,7 +66,7 @@ module au_top(
                                             .numberOut(minutes_1[3:0]),
                                             .threshold(threshold[4])
                                          );
-    Counter3 #(.BASE(6)) counterMinutes10(  .clk(clk),
+    Counter2 #(.BASE(6)) counterMinutes10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[5]),
                                             .up_down(io_dip[0]),
