@@ -32,7 +32,7 @@ module Counter2 (
   // Async rst
   always @(posedge clk, posedge rst) begin
     if (rst) begin
-      numberOut <= 8'b0;
+      numberOut <= (up_down)? 0:(BASE-1);
     end else if (enable) begin
       numberOut <= numberNext;
     end
