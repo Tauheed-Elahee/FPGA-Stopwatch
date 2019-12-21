@@ -6,7 +6,10 @@ module Display_Digits (
   );
   
   parameter NUMBER_OF_DIGITS = 1;
-  parameter REFRESH_RATE_IN_HERTZ = 200;
+  parameter REFRESH_RATE_IN_HERTZ = 500;
+  parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000;
+  
+  localparam NUMBER_OF_CLOCK_CYCLES_PER_REFRESH = BOARD_CLOCK_FREQUENCY_IN_HZ / REFRESH_RATE_IN_HERTZ; // This equals to 200_000 but ALCHITRY DOES NOT UNDERSTAND VERILOG.
   
   input wire clk;  // clock
   input wire [((NUMBER_OF_DIGITS*4)-1):0] number;  // reset
@@ -19,7 +22,7 @@ module Display_Digits (
   wire [3:0] selected_number;
 
   /* Combinational Logic */
-  Counter #(.BASE(200_000), .NUMBER_OF_BITS(64)) refresh_rate_generator(.clk(clk), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(display_refresh_clock_counter), .numberOut(display_refresh_clock_counter)); // 2^20 = 1048576
+  Counter #(.BASE(NUMBER_OF_CLOCK_CYCLES_PER_REFRESH), .NUMBER_OF_BITS(64)) refresh_rate_generator(.clk(clk), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(display_refresh_clock_counter), .numberOut(display_refresh_clock_counter)); // 2^20 = 1048576
   
   assign display_refresh_clock = (|display_refresh_clock_counter)? 0:1;
   
