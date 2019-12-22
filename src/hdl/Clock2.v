@@ -20,7 +20,7 @@ module Clock2 (
   
   assign clkOut = ~|count;
   
-  Counter2 #(.BASE(MAX_COUNT), .NUMBER_OF_BITS(64)) counter( .clk(clk),
+  Counter #(.BASE(MAX_COUNT), .NUMBER_OF_BITS(64)) counter( .clk(clk),
                                                             .rst(rst),
                                                             .enable(1),
                                                             .up_down(1),

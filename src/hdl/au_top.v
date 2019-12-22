@@ -26,7 +26,7 @@ module au_top(
     
     
     // does not handle division in the inputs properly.
-    Clock #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000),
+    Clock #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), // Alchitry does not understand Verilog and as such changing how numbers are update changes the display even though it shouldn't.
               .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)
            )
            one_second_clock(  .clk(clk),
@@ -90,7 +90,7 @@ module au_top(
     
     // It works with 3 displays but not 4. It is the combined dark majic of Alchitry and Vivado that prevents good verilog from being implemented. IT IS VERY PICKY ABOUT REFRESH RATES
     Display_Digits #(   .NUMBER_OF_DIGITS(4),
-                        .REFRESH_RATE_IN_HERTZ(500),
+                        .REFRESH_RATE_IN_HERTZ(400),
                         .BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000)
                     )
                     display_digits( .clk(clk),
