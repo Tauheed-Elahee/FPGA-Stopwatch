@@ -1,7 +1,7 @@
 module CounterModule (   
     clk,  // clock
     rst,  // reset
-    //enable, // needed but not implemented now.
+    enable, // needed but not implemented now.
     up_down,
     number
   );
@@ -12,7 +12,7 @@ module CounterModule (
   
   input wire clk;
   input wire rst;
-  //input wire enable;
+  input wire enable;
   input wire up_down;
   input wire [(NUMBER_OF_BITS-1):0] number;
   
@@ -42,7 +42,7 @@ module CounterModule (
     
     Counter #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
-                                            .enable(clock_seconds_1),
+                                            .enable(clock_seconds_1&enable),
                                             .up_down(up_down),
                                             .numberIn(seconds_1[3:0]),
                                             .numberOut(seconds_1[3:0]),
