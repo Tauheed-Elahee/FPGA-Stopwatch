@@ -40,7 +40,7 @@ module CounterModule (
     // Alchitry labs cannot understand project hierachry and so a seperate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
     // The doublicate counter was changed to a wrapper for the counter file.
     
-    Counter2 #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
+    Counter #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
                                             .enable(clock_seconds_1),
                                             .up_down(up_down),
@@ -48,7 +48,7 @@ module CounterModule (
                                             .numberOut(seconds_1[3:0]),
                                             .threshold(threshold[0])
                                          );
-    Counter2 #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds10(  .clk(clk),
+    Counter #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[1]),
                                             .up_down(up_down),
@@ -57,7 +57,7 @@ module CounterModule (
                                             .threshold(threshold[2])
                                          );
     
-    Counter2 #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes1(  .clk(clk),
+    Counter #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes1(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[3]),
                                             .up_down(up_down),
@@ -65,7 +65,7 @@ module CounterModule (
                                             .numberOut(minutes_1[3:0]),
                                             .threshold(threshold[4])
                                          );
-    Counter2 #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes10(  .clk(clk),
+    Counter #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes10(  .clk(clk),
                                             .rst(rst),
                                             .enable(threshold[5]),
                                             .up_down(up_down),
