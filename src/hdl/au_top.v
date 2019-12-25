@@ -33,7 +33,7 @@ module au_top(
     assign io_led [20] = io_button[1];
     assign io_led [19] = io_button[2];
     assign io_led [18] = io_button[3];
-    assign io_led [17] = 0;
+    assign io_led [17] = 0; // io_button[4]; // It cannot be done because of the dark majic of verilog. It shouldn't affect the display at all but it still messes it up. I do not know why.
     assign io_led [16] = |io_dip[23:2];
     
     
