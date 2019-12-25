@@ -2,7 +2,7 @@ module au_top(
     input wire clk,
     input wire rst_n,
     input wire [23:0] io_dip,
-    input wire [3:0] io_button,
+    input wire [4:0] io_button,
     output wire [7:0] led,
     output wire [23:0] io_led,
     output wire [3:0] io_sel,
@@ -33,9 +33,9 @@ module au_top(
     assign io_led [20] = io_button[1];
     assign io_led [19] = io_button[2];
     assign io_led [18] = io_button[3];
-    assign io_led [17] = |io_dip[23:2];
+    assign io_led [17] = 0;
+    assign io_led [16] = |io_dip[23:2];
     
-    assign io_led [16] = 0;
     
     assign io_led [15:12] = number [15:12];
     assign io_led [11:8] = number [11:8];
