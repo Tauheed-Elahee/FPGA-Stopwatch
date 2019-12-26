@@ -22,9 +22,9 @@ module Display_Digits (
   wire [3:0] selected_number;
 
   /* Combinational Logic */
-  Counter #(.BASE(NUMBER_OF_CLOCK_CYCLES_PER_REFRESH), .NUMBER_OF_BITS(64)) refresh_rate_generator(.clk(clk), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(display_refresh_clock_counter), .numberOut(display_refresh_clock_counter)); // 2^20 = 1048576
+  Counter #(.BASE(NUMBER_OF_CLOCK_CYCLES_PER_REFRESH), .NUMBER_OF_BITS(64)) refresh_rate_generator(.clk(clk), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(display_refresh_clock_counter), .numberOut(display_refresh_clock_counter), .threshold(display_refresh_clock)); // 2^20 = 1048576
   
-  assign display_refresh_clock = (|display_refresh_clock_counter)? 0:1;
+  // assign display_refresh_clock = (|display_refresh_clock_counter)? 0:1;
   
   Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_BITS(64)) number_selector(.clk(display_refresh_clock), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(count), .numberOut(count));
   
