@@ -18,8 +18,6 @@ module Clock (
   // 10111 11010 11110 00010 00000 00 //27 bit
   wire [63:0] count;
   
-  // assign clkOut = ~|count;
-  
   Counter #(.BASE(MAX_COUNT), .NUMBER_OF_BITS(64)) counter( .clk(clk),
                                                             .rst(rst),
                                                             .enable(1),
