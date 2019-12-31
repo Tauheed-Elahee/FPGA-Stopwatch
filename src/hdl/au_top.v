@@ -13,7 +13,7 @@ module au_top(
     
     wire rst;
     
-    reset_debouncer reset_conditioner(  .clk(clk),
+    debouncer reset_conditioner(  .clk(clk),
                                         .in(!rst_n),
                                         .out(rst)
                                      );

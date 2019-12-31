@@ -1,4 +1,4 @@
-module reset_debouncer(
+module debouncer(
     input wire clk,
     input wire in,  // async in
     output reg out  // sync out
