@@ -9,6 +9,7 @@ module Counter (
   );
   parameter BASE = 10;
   parameter NUMBER_OF_BITS = 4;
+  parameter EXPOSE_NUMBER = 1;
   
   input wire clk;
   input wire rst;
