@@ -20,7 +20,7 @@ module Counter (
   output wire threshold;
   
   
-  reg [(NUMBER_OF_BITS-1):0] number;
+  wire [(NUMBER_OF_BITS-1):0] number;
   wire [(NUMBER_OF_BITS-1):0] numberNext;
   wire [(NUMBER_OF_BITS-1):0] numberIncrement;
   wire [(NUMBER_OF_BITS-1):0] numberDecrement;
