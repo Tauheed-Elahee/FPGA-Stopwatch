@@ -20,6 +20,9 @@ module Display_Digits (
   wire display_refresh_clock;
   wire [63:0] count;
   wire [3:0] selected_number;
+  
+  reg blink;
+  wire blink_toggle;
 
   /* Combinational Logic */
   
@@ -27,6 +30,18 @@ module Display_Digits (
   Counter #(.BASE(NUMBER_OF_CLOCK_CYCLES_PER_REFRESH), .NUMBER_OF_BITS(64)) refresh_rate_generator(.clk(clk), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(display_refresh_clock_counter), .numberOut(display_refresh_clock_counter), .threshold(display_refresh_clock)); // 2^20 = 1048576
   
   Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_BITS(64)) number_selector(.clk(display_refresh_clock), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(count), .numberOut(count));
+  
+  Clock #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(BOARD_CLOCK_FREQUENCY_IN_HZ),
+              .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)
+           )
+           blinker(  .clk(clk),
+                              .rst(0),
+                              .clkOut(blink_toggle)
+                           );
+  
+  always @(posedge blink_toggle) begin
+    blink <= !blink;
+  end
   
   assign io_sel[3:0] = ~(1 << count);
   assign selected_number[3] = number[(count*4)+3];
