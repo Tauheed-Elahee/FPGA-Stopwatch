@@ -1,8 +1,10 @@
 `timescale 10ns/1ns
-`include "../src/hdl/BCD_n.v"
-`include "../src/hdl/Counter.v"
-`include "../src/hdl/clkDivider.v"
-`include "../src/hdl/Display_Digits.v"
+
+`include "../hdl/BCD.v"
+`include "../hdl/BCD_n.v"
+`include "../hdl/Counter.v"
+`include "../hdl/Clock.v"
+`include "../hdl/Display_Digits.v"
 
 /* commands to enter after running iverilog
 
@@ -16,6 +18,8 @@ gtkwave Display_Digits_tb.vcd
 
 */
 
+// Cannot do simulation due to the inablity to reset unknown values to 0.
+
 module Display_Digits_tb();
     
     // inputs
@@ -28,12 +32,8 @@ module Display_Digits_tb();
     wire [3:0] io_sel;
     wire [7:0] io_seg;
     
-    reg rst;
-    wire clkOut;
     
-    clkDivider clkDivider(.clk(clk), .rst(rst), .clkOut(clkOut));
-    
-    Display_Digits #(.NUMBER_OF_DIGITS(3)) dut (.clk(clkOut), .number({minutes_1[3:0], seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg), .rst(rst));
+    Display_Digits #(.NUMBER_OF_DIGITS(3), .REFRESH_RATE_IN_HERTZ(10), .BOARD_CLOCK_FREQUENCY_IN_HZ(60)) dut (.clk(clk), .number({minutes_1[3:0], seconds_10[3:0], seconds_1[3:0]}), .io_sel(io_sel), .io_seg(io_seg));
     
     integer i = 0;
     
@@ -47,10 +47,6 @@ module Display_Digits_tb();
         seconds_1[3:0] = 4'd0;
         seconds_10[3:0] = 4'd0;
         minutes_1[3:0] = 4'd0;
-        
-        rst = 1;
-        #2;
-        rst=0;
         
         for(i=0; i<30000; i=i+1) begin
             #1;
