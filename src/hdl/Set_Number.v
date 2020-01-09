@@ -1,7 +1,6 @@
 module Set_Number (
     input clk,  // clock
     input rst,  // reset
-    input number, // Set number as an input.
     output out
   );
 

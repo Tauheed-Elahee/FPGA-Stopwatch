@@ -10,10 +10,6 @@ module debouncer(
     // stable is a 4 bit xnor comparision
     wire stable = (compare[0]~^compare[1])~^(compare[2]~^compare[3]);
     
-    
-    // Do the comparisons with a clock that has a longer period.
-    
-    
     always@(posedge clk) begin
         compare[3] <= compare[2];
         compare[2] <= compare[1];
