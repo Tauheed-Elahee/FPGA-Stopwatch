@@ -1,4 +1,8 @@
-module Blinker (
+module Blinker  #(
+    parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000,
+    parameter OUTPUT_CLOCK_PERIOD_IN_SECONDS = 1
+  )
+  (
     input wire clk,  // clock
     input wire rst,  // reset
     output reg blink // blink
