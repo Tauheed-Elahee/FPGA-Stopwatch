@@ -1,21 +1,24 @@
 module Blinker (
-    input clk,  // clock
-    input rst,  // reset
-    output out
+    input wire clk,  // clock
+    input wire rst,  // reset
+    output reg blink // blink
   );
 
-  /* Combinational Logic */
-  always @* begin
-    out = 0;
+  
+  wire blink_toggle;
+  
+  Clock #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000),
+              .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)
+           )
+           blinker(  .clk(clk),
+                              .rst(rst),
+                              .clkOut(blink_toggle)
+                           );
+  
+  always @(posedge blink_toggle, posedge rst) begin
+    if (rst) blink <= 0;
+    else blink <= !blink;
   end
   
-  /* Sequential Logic */
-  always @(posedge clk) begin
-    if (rst) begin
-      // Add flip-flop reset values here
-    end else begin
-      // Add flip-flop q <= d statements here
-    end
-  end
   
 endmodule
