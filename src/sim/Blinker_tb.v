@@ -3,7 +3,7 @@
 
 /* commands to enter after running iverilog
 
-rm *.out *.vcd && iverilog -o _.out Clock_tb.v && vvp -v _.out && gtkwave *.vcd
+rm *.out *.vcd && iverilog -o _.out Blinker_tb.v && vvp -v _.out && gtkwave *.vcd
 
 notes
 
@@ -13,3 +13,36 @@ gtkwave Display_Digits_tb.vcd
 
 */
 
+module Blinker_tb();
+
+    reg clk;
+    reg rst;
+    wire blink;
+    
+    Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(10)) blinker_tb(.clk(clk), .rst(rst), .blink(blink));
+    
+    integer i = 0;
+    
+    initial begin
+    
+        $monitor("%100d\n", $time);
+        $dumpfile("Blinker_tb.vcd");
+        $dumpvars(0, Blinker_tb);
+        
+        clk = 0;
+        rst = 1;
+        #1;
+        clk = 1;
+        rst = 1;
+        #8;
+        clk = 0;
+        rst = 0;
+        #1;
+        
+        for (i=0; i<100; i=i+1) begin
+            clk <= !clk;
+        end
+        
+    end
+
+endmodule
