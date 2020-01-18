@@ -11,8 +11,8 @@ module Blinker  #(
   
   wire blink_toggle;
   
-  Clock #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000),
-              .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)
+  Clock #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(BOARD_CLOCK_FREQUENCY_IN_HZ),
+              .OUTPUT_CLOCK_PERIOD_IN_SECONDS(OUTPUT_CLOCK_PERIOD_IN_SECONDS)
            )
            blinker(  .clk(clk),
                               .rst(rst),
