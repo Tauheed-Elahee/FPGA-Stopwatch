@@ -19,9 +19,9 @@ module Blinker  #(
                               .clkOut(blink_toggle)
                            );
   
-  always @(posedge blink_toggle, posedge rst) begin
+  always @(posedge clk, posedge rst) begin
     if (rst) blink <= 0;
-    else blink <= !blink;
+    else if (blink_toggle) blink <= ~blink;
   end
   
   
