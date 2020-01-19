@@ -34,7 +34,8 @@ module au_top(
     assign io_led [19] = io_button[2];
     assign io_led [18] = io_button[3];
     assign io_led [17] = io_button[4];
-    assign io_led [16] = |io_dip[23:2];
+    //assign io_led [16] = |io_dip[23:2];
+    Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_PERIOD_IN_SECONDS(1)) blinker(.clk(clk), .rst(rst), .blink(io_led[16]));
     
     
     assign io_led [15:12] = number [15:12];
@@ -49,6 +50,7 @@ module au_top(
                     )
                     display_digits( .clk(clk),
                                     .number(number[15:0]),
+                                    .set_mode(io_dip[2]),
                                     .io_sel(io_sel),
                                     .io_seg(io_seg)
                     );
