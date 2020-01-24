@@ -1,20 +1,17 @@
-module CounterModule (   
-    clk,  // clock
-    rst,  // reset
-    enable, // needed but not implemented now.
-    up_down,
-    number
-  );
-  parameter NUMBER_OF_DIGITS = 4;
-  parameter NUMBER_OF_BITS_PER_DIGIT = 4;
-  
-  localparam NUMBER_OF_BITS = NUMBER_OF_DIGITS * NUMBER_OF_BITS_PER_DIGIT;
-  
-  input wire clk;
-  input wire rst;
-  input wire enable;
-  input wire up_down;
-  input wire [(NUMBER_OF_BITS-1):0] number;
+module CounterModule   #(
+                            parameter NUMBER_OF_DIGITS = 4;
+                            parameter NUMBER_OF_BITS_PER_DIGIT = 4;
+                        )
+                        (   
+                            input wire clk,  // clock
+                            input wire rst,  // reset
+                            input wire enable, // needed but not implemented now.
+                            input wire up_down,
+                            input wire [(NUMBER_OF_BITS-1):0] number // hope vivado does not throw an error otherwise do the wire declareation after the definition of local paramter
+                        );
+    
+    localparam NUMBER_OF_BITS = NUMBER_OF_DIGITS * NUMBER_OF_BITS_PER_DIGIT;
+
   
   wire clock_seconds_1;
   wire [3:0] seconds_1 = number[3:0];
