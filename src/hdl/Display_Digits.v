@@ -4,11 +4,11 @@ module Display_Digits #(
       parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000
     )
     (
-      input wire clk;  // clock
-      input wire [((NUMBER_OF_DIGITS*4)-1):0] number;  // reset
-      input wire set_mode;
-      output wire [3:0] io_sel;
-      output wire [7:0] io_seg;
+      input wire clk,  // clock
+      input wire [((NUMBER_OF_DIGITS*4)-1):0] number,  // reset
+      input wire set_mode,
+      output wire [3:0] io_sel,
+      output wire [7:0] io_seg
     );
   
   
