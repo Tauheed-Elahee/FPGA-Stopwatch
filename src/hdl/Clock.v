@@ -1,10 +1,13 @@
-module Clock (
-    input wire clk,  // clock
-    input wire rst,
-    output wire clkOut
-  );
-  parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000;
-  parameter OUTPUT_CLOCK_PERIOD_IN_SECONDS = 1;
+module Clock #(
+      parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000,
+      parameter OUTPUT_CLOCK_PERIOD_IN_SECONDS = 1
+    )
+    (
+      input wire clk,  // clock
+      input wire rst,
+      output wire clkOut
+    );
+  
   
   
   // localparams cannot be defined/depend on other local params. division is still ok.
