@@ -1,24 +1,17 @@
-module Counter (   
-    clk,  // clock
-    rst,  // reset
-    enable,
-    up_down,
-    numberIn,
-    numberOut,
-    threshold
-  );
-  parameter BASE = 10;
-  parameter NUMBER_OF_BITS = 4;
-  parameter EXPOSE_NUMBER = 1;
-  
-  input wire clk;
-  input wire rst;
-  input wire enable;
-  input wire up_down;
-  input wire [(NUMBER_OF_BITS-1):0] numberIn;
-  output reg [(NUMBER_OF_BITS-1):0] numberOut;
-  output wire threshold;
-  
+module Counter #(
+      parameter BASE = 10,
+      parameter NUMBER_OF_BITS = 4,
+      parameter EXPOSE_NUMBER = 1
+    )
+    (   
+      input wire clk,
+      input wire rst,
+      input wire enable,
+      input wire up_down,
+      input wire [(NUMBER_OF_BITS-1):0] numberIn,
+      output reg [(NUMBER_OF_BITS-1):0] numberOut,
+      output wire threshold
+    );
   
   wire [(NUMBER_OF_BITS-1):0] number;
   wire [(NUMBER_OF_BITS-1):0] numberNext;

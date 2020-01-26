@@ -1,23 +1,21 @@
-module Display_Digits (
-    clk,
-    number,
-    set_mode,
-    io_sel,
-    io_seg
-  );
+module Display_Digits #(
+      parameter NUMBER_OF_DIGITS = 1,
+      parameter REFRESH_RATE_IN_HERTZ = 500,
+      parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000
+    )
+    (
+      input wire clk,  // clock
+      input wire [((NUMBER_OF_DIGITS*4)-1):0] number,  // reset
+      input wire set_mode,
+      output wire [3:0] io_sel,
+      output wire [7:0] io_seg
+    );
   
-  parameter NUMBER_OF_DIGITS = 1;
-  parameter REFRESH_RATE_IN_HERTZ = 500;
-  parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000;
+  
   
   localparam NUMBER_OF_CLOCK_CYCLES_PER_REFRESH = BOARD_CLOCK_FREQUENCY_IN_HZ / REFRESH_RATE_IN_HERTZ / NUMBER_OF_DIGITS;
   
-  input wire clk;  // clock
-  input wire [((NUMBER_OF_DIGITS*4)-1):0] number;  // reset
-  input wire set_mode;
-  output wire [3:0] io_sel;
-  output wire [7:0] io_seg;
-
+  
   wire [63:0] display_refresh_clock_counter;
   wire display_refresh_clock;
   wire [63:0] count;
