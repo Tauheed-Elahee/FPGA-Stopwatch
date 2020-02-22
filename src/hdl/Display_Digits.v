@@ -31,7 +31,7 @@ module Display_Digits #(
   Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_BITS(64)) number_selector(.clk(display_refresh_clock), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(count), .numberOut(count));
   
   assign an_on = 1;
-  Blinker blinker(.clk(clk), .rst(rst), .blink(an_blink));
+  Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_FREQUENCY_IN_HZ(10)) blinker(.clk(clk), .rst(rst), .blink(an_blink));
   assign an = (set_mode)? an_blink:1;
   
   assign io_sel[3:0] = ~(an << count);
