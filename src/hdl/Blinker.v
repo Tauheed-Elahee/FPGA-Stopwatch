@@ -15,9 +15,9 @@ module Blinker  #(
               .OUTPUT_CLOCK_PERIOD_IN_SECONDS(OUTPUT_CLOCK_PERIOD_IN_SECONDS)
            )
            blinker(  .clk(clk),
-                              .rst(rst),
-                              .clkOut(blink_toggle)
-                           );
+                     .rst(rst),
+                     .clkOut(blink_toggle)
+                  );
   
   always @(posedge clk, posedge rst) begin
     if (rst) blink <= 0;
