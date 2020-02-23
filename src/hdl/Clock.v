@@ -19,14 +19,12 @@ module Clock #(
   
   
   // 10111 11010 11110 00010 00000 00 //27 bit
-  wire [63:0] count;
+  //wire [63:0] count;
   
-  Counter #(.BASE(MAX_COUNT), .NUMBER_OF_BITS(64)) counter( .clk(clk),
+  Counter2 #(.BASE(MAX_COUNT), .NUMBER_OF_BITS(64)) counter( .clk(clk),
                                                             .rst(rst),
                                                             .enable(1),
                                                             .up_down(1),
-                                                            .numberIn(count),
-                                                            .numberOut(count),
                                                             .threshold(clkOut)
                                                           );
   
