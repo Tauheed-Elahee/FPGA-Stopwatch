@@ -14,9 +14,9 @@ module au_top(
     wire rst;
     
     debouncer reset_conditioner(  .clk(clk),
-                                        .in(!rst_n),
-                                        .out(rst)
-                                     );
+                                  .in(!rst_n),
+                                  .out(rst)
+                               );
     
     wire [15:0] number;
     
