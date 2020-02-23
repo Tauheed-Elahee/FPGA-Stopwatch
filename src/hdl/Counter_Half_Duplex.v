@@ -30,8 +30,8 @@ module Counter_Half_Duplex #(
   always @(posedge clk, posedge rst) begin
     if (rst) begin
       numberNext <= (up_down)? 0:(BASE-1);
-    end else if (&{enable,!set}) begin
-      numberNext = (up_down)? numberIncrement:numberDecrement;
+    end else if (enable) begin
+      numberNext = (set)? number:(up_down)? numberIncrement:numberDecrement;
     end
     else begin
         numberNext = number;
