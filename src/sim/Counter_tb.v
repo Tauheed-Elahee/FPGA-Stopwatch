@@ -13,11 +13,13 @@ module Counter_tb();
     reg rst;  // reset
     reg enable;
     reg [3:0] numberIn;
+    reg [3:0] up_down;
     wire [3:0] numberOut;
     
     Counter dut(.clk(clk),
                 .rst(rst),
                 .enable(enable),
+                .up_down(up_down),
                 .numberIn(numberIn[3:0]),
                 .numberOut(numberOut[3:0])
                 );
@@ -33,6 +35,7 @@ module Counter_tb();
         clk = 0;
         rst = 0;
         enable = 1;
+        up_down = 1;
         numberIn = 4'd0;
         
         for (num_cycles=0; num_cycles<22; num_cycles=num_cycles+1) begin
