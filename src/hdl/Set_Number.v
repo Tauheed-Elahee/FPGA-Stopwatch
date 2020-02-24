@@ -44,7 +44,7 @@ module Set_Number  #(
   
   Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_FREQUENCY_IN_HZ(10)) blinker(.clk(clk), .rst(0), .blink(an_selected));
   
-  an = (!set)? 'b0:('b0 | (an_selected << selected_digit));
+  an = (!set)? ~0:(~0 & (an_selected << selected_digit));
   
   assign enable[0] = (selected_digit == 0) & (left | right) & set;
   assign enable[1] = (selected_digit == 1) & (left | right) & set;
