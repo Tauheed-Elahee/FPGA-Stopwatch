@@ -11,6 +11,8 @@ module au_top(
     output wire usb_tx
     );
     
+    wire [15:0] number;
+    
     wire rst;
     wire buttonTop;
     wire buttonCentre;
@@ -18,38 +20,48 @@ module au_top(
     wire buttonLeft;
     wire buttonRight;
     
+    wire up;
+    wire down;
+    wire left;
+    wire right;
+    
+    wire set;
+    
+    wire [3:0] an;
+    
     debouncer reset_conditioner(  .clk(clk),
                                   .in(!rst_n),
                                   .out(rst)
                                );
     
-    debouncer reset_conditioner(  .clk(clk),
+    debouncer up_conditioner(  .clk(clk),
                                   .in(io_button[0]),
                                   .out(buttonTop)
                                );
     
-    debouncer reset_conditioner(  .clk(clk),
+    debouncer centre_conditioner(  .clk(clk),
                                   .in(io_button[1]),
                                   .out(buttonCentre)
                                );
     
-    debouncer reset_conditioner(  .clk(clk),
+    debouncer down_conditioner(  .clk(clk),
                                   .in(io_button[2]),
                                   .out(buttonBottom)
                                );
     
-    debouncer reset_conditioner(  .clk(clk),
+    debouncer left_conditioner(  .clk(clk),
                                   .in(io_button[3]),
                                   .out(buttonLeft)
                                );
     
-    debouncer reset_conditioner(  .clk(clk),
+    debouncer right_conditioner(  .clk(clk),
                                   .in(io_button[4]),
                                   .out(buttonRight)
                                );
     
-    wire [15:0] number;
+    Set_Number_Controler set_number_controler (.clk(clk), .rst(rst), .buttonUp(buttonTop), .buttonCentre(buttonCentre), .buttonDown(buttonBottom), .buttonLeft(buttonLeft), .buttonRight(buttonRight), .up(up), .set(set), .down(down), .left(left), .right(right));
     
+    Set_Number #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) set_number (.clk(clk), .rst(rst), .set(set), .up(up), .down(down), .left(left), .right(right), .number(number), .an(an));
     
     CounterModule #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) counterModule(.clk(clk), .rst(rst), .enable(io_dip[1]), .up_down(io_dip[0]), .set(0), .number(number[15:0]));
     
@@ -80,7 +92,7 @@ module au_top(
                     )
                     display_digits( .clk(clk),
                                     .number(number[15:0]),
-                                    .an(~0),
+                                    .an(an),
                                     .io_sel(io_sel),
                                     .io_seg(io_seg)
                     );
