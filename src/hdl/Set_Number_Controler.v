@@ -20,10 +20,10 @@ module Set_Number_Controler  (
                 rightEdge;
 
   EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(up), .detected(upEdge));
-  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(centre), .detected(centreEdge));
-  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(down), .detected(downEdge));
-  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(left), .detected(leftEdge));
-  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(right), .detected(rightEdge));
+  EdgeDetector centreEdgeDetector(.clk(clk), .rst(rst), .signal(centre), .detected(centreEdge));
+  EdgeDetector downEdgeDetector(.clk(clk), .rst(rst), .signal(down), .detected(downEdge));
+  EdgeDetector leftEdgeDetector(.clk(clk), .rst(rst), .signal(left), .detected(leftEdge));
+  EdgeDetector rightEdgeDetector(.clk(clk), .rst(rst), .signal(right), .detected(rightEdge));
   
   always @(posedge clk, posedge rst) begin
     if (rst) begin
@@ -35,12 +35,12 @@ module Set_Number_Controler  (
         set <= set;
     end
     else begin
-        up <= (upEdge == 2'b01) 1:0;
-        down <= (downEdge == 2'b01) 1:0;
-        left <= (leftEdge == 2'b01) 1:0;
-        right <= (rightEdge == 2'b01) 1:0;
+        up <= (upEdge == 2'b01)? 1:0;
+        down <= (downEdge == 2'b01)? 1:0;
+        left <= (leftEdge == 2'b01)? 1:0;
+        right <= (rightEdge == 2'b01)? 1:0;
         
-        set <= (centreEdge == 2'b01) ~set:set;
+        set <= (centreEdge == 2'b01)? ~set:set;
     end
   end
 

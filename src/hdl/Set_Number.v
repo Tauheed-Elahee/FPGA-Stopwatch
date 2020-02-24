@@ -14,6 +14,8 @@ module Set_Number  #(
                             output wire [(NUMBER_OF_DIGITS-1):0] an
                         );
 
+  localparam NUMBER_OF_BITS = NUMBER_OF_DIGITS * NUMBER_OF_BITS_PER_DIGIT;
+
   wire [(NUMBER_OF_DIGITS-1):0] enable;
   wire up_down;
 
@@ -55,36 +57,32 @@ module Set_Number  #(
 
   Counter_Half_Duplex #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
-                                            .enable(enable_wire[0]),
+                                            .enable(enable[0]),
                                             .up_down(up_down),
                                             .set(!set),
-                                            .number(seconds_1[3:0]),
-                                            .threshold(threshold[0])
+                                            .number(seconds_1[3:0])
                                          );
   Counter_Half_Duplex #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds10(  .clk(clk),
                                             .rst(rst),
-                                            .enable(enable_wire[1]),
+                                            .enable(enable[1]),
                                             .up_down(up_down),
                                             .set(!set),
-                                            .number(seconds_10[3:0]),
-                                            .threshold(threshold[1])
+                                            .number(seconds_10[3:0])
                                          );
     
   Counter_Half_Duplex #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes1(  .clk(clk),
                                             .rst(rst),
-                                            .enable(enable_wire[2]),
+                                            .enable(enable[2]),
                                             .up_down(up_down),
                                             .set(!set),
-                                            .number(minutes_1[3:0]),
-                                            .threshold(threshold[2])
+                                            .number(minutes_1[3:0])
                                          );
   Counter_Half_Duplex #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes10(  .clk(clk),
                                             .rst(rst),
-                                            .enable(enable_wire[3]),
+                                            .enable(enable[3]),
                                             .up_down(up_down),
                                             .set(!set),
-                                            .number(minutes_10[3:0]),
-                                            .threshold(threshold[3])
+                                            .number(minutes_10[3:0])
                                          );
 
 endmodule
