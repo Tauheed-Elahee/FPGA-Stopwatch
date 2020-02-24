@@ -26,12 +26,12 @@ module Set_Number  #(
   
   wire an_selected;
   
-  always @(posedge clk) begin
+  always @(posedge clk, posedge rst) begin
     if (rst) begin
-        selected_digit = NUMBER_OF_DIGITS-1;
+        selected_digit <= 0;//NUMBER_OF_DIGITS-1;
     end
     else if (set) begin
-        case {left, right} begin
+        case ({left, right})
             {2'b10}:    selected_digit <= (selected_digit == NUMBER_OF_DIGITS-1)? selected_digit:(selected_digit+1);
             {2'b01}:    selected_digit <= (selected_digit == 0)? selected_digit:(selected_digit-1);
             default:    selected_digit <= selected_digit;
@@ -44,7 +44,7 @@ module Set_Number  #(
   
   Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_FREQUENCY_IN_HZ(10)) blinker(.clk(clk), .rst(0), .blink(an_selected));
   
-  an = (!set)? ~0:(~0 & (an_selected << selected_digit));
+  assign an = (!set)? ~0:(~0 & (an_selected << selected_digit));
   
   assign enable[0] = (selected_digit == 0) & (left | right) & set;
   assign enable[1] = (selected_digit == 1) & (left | right) & set;
