@@ -12,10 +12,40 @@ module au_top(
     );
     
     wire rst;
+    wire buttonTop;
+    wire buttonCentre;
+    wire buttonBottom;
+    wire buttonLeft;
+    wire buttonRight;
     
     debouncer reset_conditioner(  .clk(clk),
                                   .in(!rst_n),
                                   .out(rst)
+                               );
+    
+    debouncer reset_conditioner(  .clk(clk),
+                                  .in(io_button[0]),
+                                  .out(buttonTop)
+                               );
+    
+    debouncer reset_conditioner(  .clk(clk),
+                                  .in(io_button[1]),
+                                  .out(buttonCentre)
+                               );
+    
+    debouncer reset_conditioner(  .clk(clk),
+                                  .in(io_button[2]),
+                                  .out(buttonBottom)
+                               );
+    
+    debouncer reset_conditioner(  .clk(clk),
+                                  .in(io_button[3]),
+                                  .out(buttonLeft)
+                               );
+    
+    debouncer reset_conditioner(  .clk(clk),
+                                  .in(io_button[4]),
+                                  .out(buttonRight)
                                );
     
     wire [15:0] number;
@@ -26,11 +56,11 @@ module au_top(
     
     assign io_led [23] = io_dip[0];
     assign io_led [22] = io_dip[1];
-    assign io_led [21] = io_button[0];
-    assign io_led [20] = io_button[1];
-    assign io_led [19] = io_button[2];
-    assign io_led [18] = io_button[3];
-    assign io_led [17] = io_button[4];
+    assign io_led [21] = io_button[0]; // top
+    assign io_led [20] = io_button[1]; // centre
+    assign io_led [19] = io_button[2]; // buttom
+    assign io_led [18] = io_button[3]; // left
+    assign io_led [17] = io_button[4]; // right
     //assign io_led [16] = |io_dip[23:2];
     Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_FREQUENCY_IN_HZ(10)) blinker(.clk(clk), .rst(rst), .blink(io_led[16]));
     
