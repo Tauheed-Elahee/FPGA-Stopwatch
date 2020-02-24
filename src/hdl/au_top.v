@@ -50,7 +50,7 @@ module au_top(
                     )
                     display_digits( .clk(clk),
                                     .number(number[15:0]),
-                                    .set_mode(io_dip[2]),
+                                    .an(~0),
                                     .io_sel(io_sel),
                                     .io_seg(io_seg)
                     );

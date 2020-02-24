@@ -6,7 +6,7 @@ module Display_Digits #(
     (
       input wire clk,  // clock
       input wire [((NUMBER_OF_DIGITS*4)-1):0] number,  // reset
-      input wire set_mode,
+      input wire [(NUMBER_OF_DIGITS-1):0] an,
       output wire [3:0] io_sel,
       output wire [7:0] io_seg
     );
@@ -20,8 +20,6 @@ module Display_Digits #(
   wire display_refresh_clock;
   wire [63:0] count;
   wire [3:0] selected_number;
-  wire an;
-  wire an_blink;
 
   /* Combinational Logic */
   
@@ -30,11 +28,7 @@ module Display_Digits #(
   
   Counter #(.BASE(NUMBER_OF_DIGITS), .NUMBER_OF_BITS(64)) number_selector(.clk(display_refresh_clock), .rst(1'b0), .enable(1'b1), .up_down(1), .numberIn(count), .numberOut(count));
   
-  assign an_on = 1;
-  Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_FREQUENCY_IN_HZ(10)) blinker(.clk(clk), .rst(rst), .blink(an_blink));
-  assign an = (set_mode)? an_blink:1;
-  
-  assign io_sel[3:0] = ~(an << count);
+  assign io_sel[3:0] = ~(an[count] << count);
   assign selected_number[3] = number[(count*4)+3];
   assign selected_number[2] = number[(count*4)+2];
   assign selected_number[1] = number[(count*4)+1];
