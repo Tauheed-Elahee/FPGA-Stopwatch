@@ -7,7 +7,8 @@ module CounterModule   #(
                             input wire rst,  // reset
                             input wire enable, // needed but not implemented now.
                             input wire up_down,
-                            input wire [(NUMBER_OF_BITS-1):0] number // hope vivado does not throw an error otherwise do the wire declareation after the definition of local paramter
+                            input wire set,
+                            inout wire [(NUMBER_OF_BITS-1):0] number // hope vivado does not throw an error otherwise do the wire declareation after the definition of local paramter
                         );
     
     localparam NUMBER_OF_BITS = NUMBER_OF_DIGITS * NUMBER_OF_BITS_PER_DIGIT;
@@ -39,37 +40,37 @@ module CounterModule   #(
     // Alchitry labs cannot understand project hierachry and so a seperate Counter file must be created in order for Alchitry Labs to tell Vivado where it is.
     // The doublicate counter was changed to a wrapper for the counter file.
     
-    Counter #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
+    Counter_Half_Duplex #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
                                             .rst(rst),
                                             .enable(enable_wire[0]),
                                             .up_down(up_down),
-                                            .numberIn(seconds_1[3:0]),
-                                            .numberOut(seconds_1[3:0]),
+                                            .set(set),
+                                            .number(seconds_1[3:0]),
                                             .threshold(threshold[0])
                                          );
-    Counter #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds10(  .clk(clk),
+    Counter_Half_Duplex #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds10(  .clk(clk),
                                             .rst(rst),
                                             .enable(enable_wire[1]),
                                             .up_down(up_down),
-                                            .numberIn(seconds_10[3:0]),
-                                            .numberOut(seconds_10[3:0]),
+                                            .set(set),
+                                            .number(seconds_10[3:0]),
                                             .threshold(threshold[1])
                                          );
     
-    Counter #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes1(  .clk(clk),
+    Counter_Half_Duplex #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes1(  .clk(clk),
                                             .rst(rst),
                                             .enable(enable_wire[2]),
                                             .up_down(up_down),
-                                            .numberIn(minutes_1[3:0]),
-                                            .numberOut(minutes_1[3:0]),
+                                            .set(set),
+                                            .number(minutes_1[3:0]),
                                             .threshold(threshold[2])
                                          );
-    Counter #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes10(  .clk(clk),
+    Counter_Half_Duplex #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes10(  .clk(clk),
                                             .rst(rst),
                                             .enable(enable_wire[3]),
                                             .up_down(up_down),
-                                            .numberIn(minutes_10[3:0]),
-                                            .numberOut(minutes_10[3:0]),
+                                            .set(set),
+                                            .number(minutes_10[3:0]),
                                             .threshold(threshold[3])
                                          );
   

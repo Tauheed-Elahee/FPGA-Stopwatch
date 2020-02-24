@@ -21,7 +21,7 @@ module au_top(
     wire [15:0] number;
     
     
-    CounterModule #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) counterModule(.clk(clk), .rst(rst), .enable(io_dip[1]), .up_down(io_dip[0]), .number(number[15:0]));
+    CounterModule #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) counterModule(.clk(clk), .rst(rst), .enable(io_dip[1]), .up_down(io_dip[0]), .set(0), .number(number[15:0]));
     
     
     assign io_led [23] = io_dip[0];
