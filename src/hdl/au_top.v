@@ -63,6 +63,8 @@ module au_top(
     
     Set_Number #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) set_number (.clk(clk), .rst(rst), .set(set), .up(up), .down(down), .left(left), .right(right), .number(number), .an(an));
     
+    // TODO: tie set of CounterModule to set wire instead of 0
+    
     CounterModule #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) counterModule(.clk(clk), .rst(rst), .enable(io_dip[1]), .up_down(io_dip[0]), .set(0), .number(number[15:0]));
     
     

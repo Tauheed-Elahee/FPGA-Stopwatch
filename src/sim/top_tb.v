@@ -12,6 +12,8 @@ rm *.out *.vcd && iverilog -o _.out top_tb.v && vvp -v _.out && gtkwave *.vcd
 
 */
 
+// TODO: Need to fix this sim to figure out what is going on with Set_Number module
+
 module top_tb();
 
     // inputs
