@@ -19,11 +19,11 @@ module Set_Number_Controler  (
                 leftEdge,
                 rightEdge;
 
-  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(up), .detected(upEdge));
-  EdgeDetector centreEdgeDetector(.clk(clk), .rst(rst), .signal(centre), .detected(centreEdge));
-  EdgeDetector downEdgeDetector(.clk(clk), .rst(rst), .signal(down), .detected(downEdge));
-  EdgeDetector leftEdgeDetector(.clk(clk), .rst(rst), .signal(left), .detected(leftEdge));
-  EdgeDetector rightEdgeDetector(.clk(clk), .rst(rst), .signal(right), .detected(rightEdge));
+  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(buttonUp), .detected(upEdge));
+  EdgeDetector centreEdgeDetector(.clk(clk), .rst(rst), .signal(buttonCentre), .detected(centreEdge));
+  EdgeDetector downEdgeDetector(.clk(clk), .rst(rst), .signal(buttonDown), .detected(downEdge));
+  EdgeDetector leftEdgeDetector(.clk(clk), .rst(rst), .signal(buttonLeft), .detected(leftEdge));
+  EdgeDetector rightEdgeDetector(.clk(clk), .rst(rst), .signal(buttonRight), .detected(rightEdge));
   
   always @(posedge clk, posedge rst) begin
     if (rst) begin
