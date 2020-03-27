@@ -61,11 +61,11 @@ module au_top(
     
     Set_Number_Controler set_number_controler (.clk(clk), .rst(rst), .buttonUp(buttonTop), .buttonCentre(buttonCentre), .buttonDown(buttonBottom), .buttonLeft(buttonLeft), .buttonRight(buttonRight), .up(up), .set(set), .down(down), .left(left), .right(right));
     
-    Set_Number #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) set_number (.clk(clk), .rst(rst), .set(set), .up(up), .down(down), .left(left), .right(right), .number(number), .an(an));
+    Set_Number #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) set_number (.clk(clk), .rst(rst), .set(set), .up(up), .down(down), .left(left), .right(right), .number(number[15:0]), .an(an));
     
     // TODO: tie set of CounterModule to set wire instead of 0
     
-    CounterModule #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) counterModule(.clk(clk), .rst(rst), .enable(io_dip[1]), .up_down(io_dip[0]), .set(0), .number(number[15:0]));
+    CounterModule #(.NUMBER_OF_DIGITS(4), .NUMBER_OF_BITS_PER_DIGIT(4)) counterModule(.clk(clk), .rst(rst), .enable(io_dip[1]), .up_down(io_dip[0]), .set(set), .number(number[15:0]));
     
     
     assign io_led [23] = io_dip[0];
