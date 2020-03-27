@@ -29,35 +29,38 @@ module au_top(
     
     wire [3:0] an;
     
-    debouncer reset_conditioner(  .clk(clk),
-                                  .in(!rst_n),
-                                  .out(rst)
-                               );
+    debouncer   #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000),
+                    .SAMPLING_RATE(1000)
+                )
+                    reset_conditioner   (   .clk(clk),
+                                            .in(!rst_n),
+                                            .out(rst)
+                                        ),
     
-    debouncer up_conditioner(  .clk(clk),
-                                  .in(io_button[0]),
-                                  .out(buttonTop)
-                               );
+                    up_conditioner      (   .clk(clk),
+                                            .in(io_button[0]),
+                                            .out(buttonTop)
+                                        ),
+        
+                    centre_conditioner  (   .clk(clk),
+                                            .in(io_button[1]),
+                                            .out(buttonCentre)
+                                        ),
+        
+                    down_conditioner    (   .clk(clk),
+                                            .in(io_button[2]),
+                                            .out(buttonBottom)
+                                        ),
     
-    debouncer centre_conditioner(  .clk(clk),
-                                  .in(io_button[1]),
-                                  .out(buttonCentre)
-                               );
+                    left_conditioner    (   .clk(clk),
+                                            .in(io_button[3]),
+                                            .out(buttonLeft)
+                                        ),
     
-    debouncer down_conditioner(  .clk(clk),
-                                  .in(io_button[2]),
-                                  .out(buttonBottom)
-                               );
-    
-    debouncer left_conditioner(  .clk(clk),
-                                  .in(io_button[3]),
-                                  .out(buttonLeft)
-                               );
-    
-    debouncer right_conditioner(  .clk(clk),
-                                  .in(io_button[4]),
-                                  .out(buttonRight)
-                               );
+                    right_conditioner   (   .clk(clk),
+                                            .in(io_button[4]),
+                                            .out(buttonRight)
+                                        );
     
     Set_Number_Controler set_number_controler (.clk(clk), .rst(rst), .buttonUp(buttonTop), .buttonCentre(buttonCentre), .buttonDown(buttonBottom), .buttonLeft(buttonLeft), .buttonRight(buttonRight), .up(up), .set(set), .down(down), .left(left), .right(right));
     
