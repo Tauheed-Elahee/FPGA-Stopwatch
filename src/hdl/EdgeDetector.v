@@ -5,11 +5,12 @@ module EdgeDetector (
   output reg [1:0] detected
   );
   
-  wire oldSignal;
+  reg oldSignal;
   
   always @(posedge clk, posedge rst) begin
     if (rst) begin
         detected <= 0;
+        oldSignal <= 0;
     end
     else begin
         case ({oldSignal, signal})
@@ -17,6 +18,8 @@ module EdgeDetector (
             {2'b10}:    detected <= 2'b10;
             default:    detected <= 0;
         endcase
+        
+        oldSignal <= signal;
     end
   end
   
