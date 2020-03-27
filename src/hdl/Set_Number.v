@@ -48,10 +48,10 @@ module Set_Number  #(
   
   assign an = (!set)? ~0:(~0 & (an_selected << selected_digit));
   
-  assign enable[0] = (selected_digit == 0) & (left | right) & set;
-  assign enable[1] = (selected_digit == 1) & (left | right) & set;
-  assign enable[2] = (selected_digit == 2) & (left | right) & set;
-  assign enable[3] = (selected_digit == 3) & (left | right) & set;
+  assign enable[0] = (selected_digit == 0) & (up | down) & set;
+  assign enable[1] = (selected_digit == 1) & (up | down) & set;
+  assign enable[2] = (selected_digit == 2) & (up | down) & set;
+  assign enable[3] = (selected_digit == 3) & (up | down) & set;
   
   assign up_down = (up)? 'b1:((down)? 'b0:'bz);
 
