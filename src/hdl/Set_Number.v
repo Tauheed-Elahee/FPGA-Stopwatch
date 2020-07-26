@@ -1,6 +1,6 @@
 module Set_Number  #(
-                            parameter NUMBER_OF_DIGITS = 4,
-                            parameter NUMBER_OF_BITS_PER_DIGIT = 4
+                            parameter NUMBER_OF_DIGITS			=	4,
+                            parameter NUMBER_OF_BITS_PER_DIGIT	=	4
                         )
                         (   
                             input wire clk,  // clock
@@ -19,10 +19,10 @@ module Set_Number  #(
   wire [(NUMBER_OF_DIGITS-1):0] enable;
   wire up_down;
 
-  wire [3:0] seconds_1 = number[3:0];
-  wire [3:0] seconds_10 = number[7:4];
-  wire [3:0] minutes_1 = number[11:8];
-  wire [3:0] minutes_10 = number[15:12];
+  wire [3:0] seconds_1	= number[ 3: 0];
+  wire [3:0] seconds_10	= number[ 7: 4];
+  wire [3:0] minutes_1	= number[11: 8];
+  wire [3:0] minutes_10	= number[15:12];
   
   reg [(NUMBER_OF_DIGITS-1):0] selected_digit;
   
@@ -44,7 +44,14 @@ module Set_Number  #(
     end
   end
   
-  Blinker #(.BOARD_CLOCK_FREQUENCY_IN_HZ(100_000_000), .OUTPUT_CLOCK_FREQUENCY_IN_HZ(2)) blinker(.clk(clk), .rst(0), .blink(an_selected));
+  Blinker #(
+  .BOARD_CLOCK_FREQUENCY_IN_HZ	(100_000_000),
+  .OUTPUT_CLOCK_FREQUENCY_IN_HZ	(2)
+  ) blinker (
+  .clk(clk),
+  .rst(0),
+  .blink(an_selected)
+  );
   
   assign an [(NUMBER_OF_DIGITS-1):0] = ~( (!set)? 'b0:(('b0 | an_selected) << selected_digit) );
   
@@ -55,34 +62,46 @@ module Set_Number  #(
   
   assign up_down = (up)? 'b1:((down)? 'b0:'bz);
 
-  Counter_Half_Duplex #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds1(  .clk(clk),
-                                            .rst(rst),
-                                            .enable(enable[0]),
-                                            .up_down(up_down),
-                                            .set(!set),
-                                            .number(seconds_1[3:0])
+  Counter_Half_Duplex #(
+  .BASE				(10),
+  .NUMBER_OF_BITS	(NUMBER_OF_BITS_PER_DIGIT)
+  ) counterSeconds1(  						.clk		(clk),
+                                            .rst		(rst),
+                                            .enable		(enable[0]),
+                                            .up_down	(up_down),
+                                            .set		(!set),
+                                            .number		(seconds_1[3:0])
                                          );
-  Counter_Half_Duplex #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterSeconds10(  .clk(clk),
-                                            .rst(rst),
-                                            .enable(enable[1]),
-                                            .up_down(up_down),
-                                            .set(!set),
-                                            .number(seconds_10[3:0])
+  Counter_Half_Duplex #(
+  .BASE				(6),
+  .NUMBER_OF_BITS	(NUMBER_OF_BITS_PER_DIGIT)
+  ) counterSeconds10(						.clk		(clk),
+                                            .rst		(rst),
+                                            .enable		(enable[1]),
+                                            .up_down	(up_down),
+                                            .set		(!set),
+                                            .number		(seconds_10[3:0])
                                          );
     
-  Counter_Half_Duplex #(.BASE(10), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes1(  .clk(clk),
-                                            .rst(rst),
-                                            .enable(enable[2]),
-                                            .up_down(up_down),
-                                            .set(!set),
-                                            .number(minutes_1[3:0])
+  Counter_Half_Duplex #(
+  .BASE				(10),
+  .NUMBER_OF_BITS	(NUMBER_OF_BITS_PER_DIGIT)
+  ) counterMinutes1(  .clk(clk),
+                                            .rst		(rst),
+                                            .enable		(enable[2]),
+                                            .up_down	(up_down),
+                                            .set		(!set),
+                                            .number		(minutes_1[3:0])
                                          );
-  Counter_Half_Duplex #(.BASE(6), .NUMBER_OF_BITS(NUMBER_OF_BITS_PER_DIGIT)) counterMinutes10(  .clk(clk),
-                                            .rst(rst),
-                                            .enable(enable[3]),
-                                            .up_down(up_down),
-                                            .set(!set),
-                                            .number(minutes_10[3:0])
+  Counter_Half_Duplex #(
+  .BASE				(6),
+  .NUMBER_OF_BITS	(NUMBER_OF_BITS_PER_DIGIT)
+  ) counterMinutes10(  						.clk		(clk),
+                                            .rst		(rst),
+                                            .enable		(enable[3]),
+                                            .up_down	(up_down),
+                                            .set		(!set),
+                                            .number		(minutes_10[3:0])
                                          );
 
 endmodule

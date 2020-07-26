@@ -19,11 +19,36 @@ module Set_Number_Controler  (
                 leftEdge,
                 rightEdge;
 
-  EdgeDetector upEdgeDetector(.clk(clk), .rst(rst), .signal(buttonUp), .detected(upEdge));
-  EdgeDetector centreEdgeDetector(.clk(clk), .rst(rst), .signal(buttonCentre), .detected(centreEdge));
-  EdgeDetector downEdgeDetector(.clk(clk), .rst(rst), .signal(buttonDown), .detected(downEdge));
-  EdgeDetector leftEdgeDetector(.clk(clk), .rst(rst), .signal(buttonLeft), .detected(leftEdge));
-  EdgeDetector rightEdgeDetector(.clk(clk), .rst(rst), .signal(buttonRight), .detected(rightEdge));
+  EdgeDetector upEdgeDetector (
+  .clk		(clk),
+  .rst		(rst),
+  .signal	(buttonUp),
+  .detected	(upEdge)
+  );
+  EdgeDetector centreEdgeDetector (
+  .clk		(clk),
+  .rst		(rst),
+  .signal	(buttonCentre),
+  .detected	(centreEdge)
+  );
+  EdgeDetector downEdgeDetector (
+  .clk		(clk),
+  .rst		(rst),
+  .signal	(buttonDown),
+  .detected	(downEdge)
+  );
+  EdgeDetector leftEdgeDetector (
+  .clk		(clk),
+  .rst		(rst),
+  .signal	(buttonLeft),
+  .detected	(leftEdge)
+  );
+  EdgeDetector rightEdgeDetector (
+  .clk		(clk),
+  .rst		(rst),
+  .signal	(buttonRight),
+  .detected	(rightEdge)
+  );
   
   always @(posedge clk, posedge rst) begin
     if (rst) begin
@@ -35,10 +60,10 @@ module Set_Number_Controler  (
         set <= set;
     end
     else begin
-        up <= (upEdge == 2'b01)? 1:0;
-        down <= (downEdge == 2'b01)? 1:0;
-        left <= (leftEdge == 2'b01)? 1:0;
-        right <= (rightEdge == 2'b01)? 1:0;
+        up		<= (upEdge == 2'b01)? 1:0;
+        down	<= (downEdge == 2'b01)? 1:0;
+        left	<= (leftEdge == 2'b01)? 1:0;
+        right	<= (rightEdge == 2'b01)? 1:0;
         
         set <= (centreEdge == 2'b01)? ~set:set;
     end

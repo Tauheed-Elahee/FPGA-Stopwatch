@@ -1,7 +1,7 @@
 module Counter_Half_Duplex #(
-      parameter BASE = 10,
-      parameter NUMBER_OF_BITS = 4,
-      parameter EXPOSE_NUMBER = 1
+      parameter BASE			=	10,
+      parameter NUMBER_OF_BITS	=	 4,
+      parameter EXPOSE_NUMBER	=	 1
     )
     (   
       input wire clk,
@@ -14,7 +14,7 @@ module Counter_Half_Duplex #(
     );
   
   wire [(NUMBER_OF_BITS-1):0] numberCurrent;
-  reg [(NUMBER_OF_BITS-1):0] numberNext;
+  reg  [(NUMBER_OF_BITS-1):0] numberNext;
   wire [(NUMBER_OF_BITS-1):0] numberIncrement;
   wire [(NUMBER_OF_BITS-1):0] numberDecrement;
   

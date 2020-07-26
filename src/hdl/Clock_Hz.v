@@ -1,6 +1,6 @@
 module Clock_Hz #(
-      parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000,
-      parameter OUTPUT_CLOCK_FREQUENCY_IN_HZ = 1
+      parameter BOARD_CLOCK_FREQUENCY_IN_HZ		=	100_000_000,
+      parameter OUTPUT_CLOCK_FREQUENCY_IN_HZ	=	1
     )
     (
       input wire clk,  // clock

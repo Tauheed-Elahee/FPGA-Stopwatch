@@ -1,7 +1,7 @@
 module Display_Digits #(
-      parameter NUMBER_OF_DIGITS = 1,
-      parameter REFRESH_RATE_IN_HERTZ = 500,
-      parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000
+      parameter NUMBER_OF_DIGITS		= 1,
+      parameter REFRESH_RATE_IN_HERTZ		= 500,
+      parameter BOARD_CLOCK_FREQUENCY_IN_HZ	= 100_000_000
     )
     (
       input wire clk,  // clock

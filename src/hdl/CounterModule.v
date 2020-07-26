@@ -1,6 +1,6 @@
 module CounterModule   #(
-                            parameter NUMBER_OF_DIGITS = 4,
-                            parameter NUMBER_OF_BITS_PER_DIGIT = 4
+                            parameter NUMBER_OF_DIGITS			=	4,
+                            parameter NUMBER_OF_BITS_PER_DIGIT	=	4
                         )
                         (   
                             input wire clk,  // clock

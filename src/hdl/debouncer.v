@@ -1,6 +1,6 @@
 module debouncer #(
-    parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000,
-    parameter SAMPLING_RATE = 1000
+    parameter BOARD_CLOCK_FREQUENCY_IN_HZ	=	100_000_000,
+    parameter SAMPLING_RATE			=	1000
     )
     (
     input wire clk,

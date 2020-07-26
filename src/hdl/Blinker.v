@@ -1,6 +1,6 @@
 module Blinker  #(
-    parameter BOARD_CLOCK_FREQUENCY_IN_HZ = 100_000_000,
-    parameter OUTPUT_CLOCK_FREQUENCY_IN_HZ = 1
+    parameter BOARD_CLOCK_FREQUENCY_IN_HZ	=	100_000_000,
+    parameter OUTPUT_CLOCK_FREQUENCY_IN_HZ	=	1
   )
   (
     input wire clk,  // clock
@@ -11,8 +11,8 @@ module Blinker  #(
   
   wire blink_toggle;
   
-  Clock_Hz #(  .BOARD_CLOCK_FREQUENCY_IN_HZ(BOARD_CLOCK_FREQUENCY_IN_HZ),
-               .OUTPUT_CLOCK_FREQUENCY_IN_HZ(OUTPUT_CLOCK_FREQUENCY_IN_HZ * 2)
+  Clock_Hz #(  .BOARD_CLOCK_FREQUENCY_IN_HZ	(BOARD_CLOCK_FREQUENCY_IN_HZ),
+               .OUTPUT_CLOCK_FREQUENCY_IN_HZ	(OUTPUT_CLOCK_FREQUENCY_IN_HZ * 2)
             )
             blinker(  .clk(clk),
                       .rst(rst),
