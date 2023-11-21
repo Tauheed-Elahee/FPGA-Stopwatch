@@ -27,3 +27,5 @@ THIS MUST BE DONE IN EVERY REPO FOR SOME RASON AS GIT IS APPARENTLY NOT USER FRI
 
 https://stackoverflow.com/questions/6448242/git-push-error-insufficient-permission-for-adding-an-object-to-repository-datab
 New keys
+
+Make sure that the local git configuration is correct.
