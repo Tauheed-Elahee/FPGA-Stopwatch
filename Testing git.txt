@@ -31,3 +31,5 @@ New keys
 Make sure that the local git configuration is correct.
 
 Xilinx Part number: xc7a35tftg256-1
+
+Vivado editor setup: https://support.xilinx.com/s/question/0D52E00006hprvBSAQ/vivado-20211-stuck-initializing-language-server?language=en_US
