@@ -29,3 +29,5 @@ https://stackoverflow.com/questions/6448242/git-push-error-insufficient-permissi
 New keys
 
 Make sure that the local git configuration is correct.
+
+Xilinx Part number: xc7a35tftg256-1
